@@ -1,0 +1,82 @@
+<!--<app-header></app-header>
+<main>
+  <div class="container">
+    &lt;!&ndash;<h1 class="text-center" style="color: black;">Products Catalog</h1>
+    <br>&ndash;&gt;
+    <div class="row-mt-5">
+      &lt;!&ndash;Grid column&ndash;&gt;
+      <div class="col-md-4 mb-4">
+        <app-products-by-category></app-products-by-category>
+      </div>
+      &lt;!&ndash;Grid column&ndash;&gt;
+
+      &lt;!&ndash;Grid column&ndash;&gt;
+      <div class="col-md-8 mb-4">
+        &lt;!&ndash;<div class="row flow-offset-1">
+          <div *ngFor="let tempProduct of products" class="col-xs-6 col-md-4 py-3">
+            <div class="product tumbnail thumbnail-3"><a href="#"><img alt="" src="{{tempProduct.productImageUrl}}"></a>
+              <div class="caption">
+                <h6 style="color: #1f2021"><a href="#">{{tempProduct.productName}}</a></h6><span class="price">
+              </span><span class="price sale">{{tempProduct.productPrice | currency: 'INR'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>&ndash;&gt;
+      </div>
+
+    </div>
+  </div>
+  </main>
+<app-footer></app-footer>-->
+
+<app-header></app-header>
+<!--Main layout-->
+<main>
+  <div class="container-fluid pl-5 pr-5">
+
+    <!--Grid row-->
+    <div class="row mt-5">
+
+      <!--Grid column-->
+      <div class="col-md-2 mb-4">
+        <app-products-by-category></app-products-by-category>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-10">
+          <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-3 py-2 mr-n2" *ngFor="let tempProduct of products">
+              <!-- Card -->
+              <div class="card mb-2">
+                <div style="height: 250px;">
+                  <img class="card-img-top p-4" style="object-fit: contain; height: 100%; width: 100%;"
+                       routerLink="/products/product-details/{{tempProduct.id}}"
+                       src="{{tempProduct.productImageUrl}}" alt="Sample">
+                  <!--<a href="#!">
+                    <div class="mask">
+                      <img class="img-fluid w-100"
+                           src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
+                      <div class="mask rgba-black-slight"></div>
+                    </div>
+                  </a>-->
+                </div>
+              </div>
+                <div class="card-body text-center">
+                  <h6 class="card-title mt-n3">{{tempProduct.productName}}</h6>
+                  <p class="card-text mt-n2"><strong>{{tempProduct.productPrice | currency: 'INR'}}</strong></p>
+              <!-- Card -->
+              </div>
+            </div>
+          </div>
+      </div>
+      <!--Grid column-->
+      <hr>
+    </div>
+    <!--Grid row-->
+
+  </div>
+</main>
+<!--Main layout-->
+<app-footer></app-footer>

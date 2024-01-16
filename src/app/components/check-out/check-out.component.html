@@ -1,0 +1,141 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="py-5 text-center">
+    <h4><strong>Enter Your Shipping Details</strong></h4>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+        <span class="badge badge-danger badge-pill">{{ objCart.productList.length }}</span>
+      </h4>
+      <ul class="list-group" *ngFor="let tempProduct of objCart.productList">
+        <!--<li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">{{ tempProduct.productName }} ({{ tempProduct.quantity }})</h6>
+          </div>
+        </li>-->
+        <li class="list-group-item d-flex justify-content-between" >
+          <!--<small class="text-muted">Product Price</small>-->
+          <div>
+            <h6 class="my-0 d-inline-block text-truncate" style="max-width: 150px;">{{tempProduct.productName}}</h6>
+          </div>
+          <span class="text-center"> x {{tempProduct.quantity}}</span>
+          <strong class="text-muted">{{ tempProduct.productPrice | currency: 'INR' }}</strong>
+        </li>
+
+        <!--<li class="list-group-item d-flex justify-content-between">
+          <span>Amount</span>
+          <strong>{{tempProduct.quantity * tempProduct.productPrice | currency: 'INR' }}</strong>
+        </li>-->
+
+
+      </ul>
+      <li class="list-group-item d-flex justify-content-between">
+        <span>Total Amount</span>
+        <strong>{{objCart.totalPrice | currency: 'INR' }}</strong>
+      </li>
+
+
+    </div>
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Billing address</h4>
+
+      <form  [formGroup]="myForm" (ngSubmit)=" !checkoutform.invalid && onSubmit()" #checkoutform="ngForm">
+
+        <div class="form-group">
+          <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName" class="control-label required">First Name <span style="color: darkred">*</span></label>
+            <input type="text" id="firstName" class="form-control"[(ngModel)]="objCheckout.firstName" formControlName="firstName" name="firstName">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName" class="control-label required">Last Name <span style="color: darkred">*</span></label>
+            <input type="text" id="lastName" class="form-control"[(ngModel)]="objCheckout.lastName" formControlName="lastName" name="lastName">
+          </div>
+        </div>
+        </div>
+
+        <div class="form-group">
+          <div class="mb-3">
+            <label for="customerUserName" class="control-label required">Email <span style="color: darkred">*</span></label>
+            <input type="text" id="customerUserName" class="form-control" [(ngModel)]="username" readonly formControlName="customerUserName">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="mb-3">
+            <label for="phoneNo" class="control-label required">Mobile No. <span style="color: darkred">*</span></label>
+            <input type="text" id="phoneNo" class="form-control" [(ngModel)]="objCheckout.phoneNo" formControlName="phoneNo" name="phoneNo">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="mb-3">
+            <label for="addressLine1" class="control-label required">Address Line 1 <span
+              style="color: darkred">*</span></label>
+            <input type="text" id="addressLine1" class="form-control" [(ngModel)]="objCheckout.addressLine1"
+                   formControlName="addressLine1">
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="mb-3">
+            <label for="addressLine2" class="control-label required">Address Line 2 <span style="color: grey">(Optional)</span></label>
+            <input type="text" id="addressLine2" class="form-control" [(ngModel)]="objCheckout.addressLine2"
+                   formControlName="addressLine2">
+          </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-md-3 mb-3">
+              <label for="country" class="control-label required">Country <span style="color: darkred">*</span></label>
+              <select class="custom-select d-block w-100" id="country" class="form-control"
+                      [(ngModel)]="objCheckout.country" formControlName="country">
+                <option value="">Choose...</option>
+                <option>India</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="state" class="control-label required">State <span style="color: darkred">*</span></label>
+              <select class="custom-select d-block w-100" id="state" class="form-control" [(ngModel)]="objCheckout.state"
+                      formControlName="state">
+                <option value="">Choose...</option>
+                <option>Nagaland</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="city" class="control-label required">City <span style="color: darkred">*</span></label>
+              <select class="custom-select d-block w-100" id="city" class="form-control" [(ngModel)]="objCheckout.city"
+                      formControlName="city">
+                <option value="">Choose...</option>
+                <option>Kohima</option>
+                <option>Dimapur</option>
+                <option>Mokochung</option>
+                <option>Wokha</option>
+              </select>
+
+            </div>
+
+
+            <div class="col-md-3 mb-3">
+              <label for="zipCode" class="control-label required">Zip Code <span style="color: darkred">*</span></label>
+              <input type="text" id="zipCode" class="form-control" [(ngModel)]="objCheckout.zipCode"
+                     formControlName="zipCode">
+          </div>
+
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block mb-5" type="submit" [disabled]="!myForm.valid"
+                (click)="passData()">Proceed to Payment</button>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
